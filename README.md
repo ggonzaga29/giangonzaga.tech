@@ -1,6 +1,6 @@
 # giangonzaga.dev
 
-This is my personal website. It's built with Next.js and Tailwind CSS and Shadcn. It's deployed on Vercel.
+This is my personal website. It's built with Next.js and Tailwind CSS and Shadcn. Deployed on Vercel.
 
 ## Development
 To run the project locally, run the following command:
