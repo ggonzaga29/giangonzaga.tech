@@ -13,4 +13,5 @@ npm run dev
 # build the project
 npm run build
 ```
+> I'll replace the domain once I buy a .dev domain
 
