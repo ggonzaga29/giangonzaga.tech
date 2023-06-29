@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+import validator from 'validator';
 
+import { Loader2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -15,17 +17,66 @@ const ContactForm = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [message, setMessage] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
 
-	const sendMessage = () => {
-		if (message.length == 0) {
+	const sendMessage = async () => {
+		setIsLoading(false);
+
+		if (message.length === 0) {
+			toast({
+				title: 'Message cannot be empty',
+				description: 'Please enter a message to send',
+			});
+			return;
 		}
 
-		toast({
-			title: 'Your message has been sent',
-			description: 'I will get back to you soon!',
+		if (name.length === 0 || email.length === 0) {
+			toast({
+				title: 'Name or email cannot be empty',
+				description:
+					'Please enter your name or email so I know how to respond to you :)',
+			});
+			return;
+		}
+
+		if (!validator.isEmail(email)) {
+			toast({
+				title: 'Invalid email',
+				description: 'Please enter a valid email',
+			});
+			return;
+		}
+
+		setIsLoading(true);
+
+		const res = await fetch('/api/contact', {
+			method: 'POST',
+			body: JSON.stringify({
+				name,
+				email,
+				message,
+			}),
+			headers: {
+				'Content-Type': 'application/json',
+			},
 		});
 
-		console.log('Message sent!');
+		if (res.status === 200) {
+			toast({
+				title: 'Message sent!',
+				description: 'I will get back to you within 24 hours!',
+			});
+			setName('');
+			setEmail('');
+			setMessage('');
+		} else {
+			toast({
+				title: 'Error sending message',
+				description: 'Please try again later',
+			});
+		}
+
+		setIsLoading(false);
 	};
 
 	return (
@@ -67,9 +118,20 @@ const ContactForm = () => {
 
 			<div className='grid w-full max-w-sm mt-3'>
 				<Button onClick={sendMessage}>
-					<Send className='mr-2 h-4 w-4' /> Contact Me!
+					{!isLoading ? (
+						<>
+							<Send className='mr-2 h-4 w-4' /> Contact Me!
+						</>
+					) : (
+						<>
+							<Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please
+							wait
+						</>
+					)}
 				</Button>
 			</div>
+			<Label className='text-sm '>via Discord Webhooks</Label>
+
 		</div>
 	);
 };
