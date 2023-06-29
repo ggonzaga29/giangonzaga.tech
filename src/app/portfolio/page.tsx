@@ -78,8 +78,8 @@ const Portfolio = () => {
 	return (
 		<div>
 			<div>
-				<h2 className='font-bold text-5xl mb-2 '>Technologies</h2>
-				<div className='grid grid-cols-6 mt-7 gap-5'>
+				<h2 className='font-bold text-5xl mb-2'>Technologies</h2>
+				<div className='grid md:grid-cols-6 grid-cols-3 mt-7 gap-5'>
 					{technologies.map((technology) => (
 						<Link
 							href={technology.url}

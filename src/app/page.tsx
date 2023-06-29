@@ -4,7 +4,17 @@ import { SocialIcon } from 'react-social-icons';
 export default function Home() {
 	return (
 		<main>
-			<div className='flex'>
+			<div className='flex md:flex-row-reverse gap-5 flex-col items-start'>
+				<section className='flex-1'>
+					<Image
+						src='/profile.jpg'
+						width={500}
+						height={500}
+						className=' mx-auto rounded-full md:w-[500px] md:h-auto w-1/2 h-1/2'
+						alt='Gian Gonzaga'
+					/>
+				</section>
+
 				<section className='flex-1'>
 					<div className='mb-5 -ml-1'>
 						<h1 className='font-bold text-5xl mb-2 '>Gian Gonzaga</h1>
@@ -16,8 +26,8 @@ export default function Home() {
 						<p className='leading-loose'>
 							Hey there! I&apos;m Gian Gonzaga, your friendly web
 							developer extraordinaire! I live and breathe JavaScript,
-							TypeScript, React, and more! I&apos;m here to create
-							the most awesome user experiences ever.
+							TypeScript, React, and more! I&apos;m here to create the
+							most awesome user experiences ever.
 							<br />
 							<br />
 							I&apos;m all about delivering clean code that makes your
@@ -33,15 +43,6 @@ export default function Home() {
 							opportunities.
 						</p>
 					</div>
-				</section>
-				<section className='flex-1 relative'>
-					<Image
-						src='/profile.jpg'
-						width={400}
-						height={400}
-						className=' mx-auto rounded-full'
-						alt='Gian Gonzaga'
-					/>
 				</section>
 			</div>
 

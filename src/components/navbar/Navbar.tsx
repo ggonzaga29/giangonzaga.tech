@@ -29,8 +29,8 @@ const Navbar = () => {
 	const lightClasses = 'text-gray-400 hover:text-[#1F2937]';
 
 	return (
-		<div className='h-16 mt-10 select-none '>
-			<div className='max-w-[67%] mx-auto h-full flex items-center justify-between'>
+		<div className='h-16 md:mt-10 mt-5 select-none '>
+			<div className='md:max-w-[67%] mx-auto md:px-0 px-4 h-full flex items-center justify-between'>
 				<div>
 					<h1 className='font-bold text-3xl '>GG</h1>
 				</div>

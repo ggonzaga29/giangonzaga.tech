@@ -25,7 +25,7 @@ export default function RootLayout({
 					enableSystem
 				>
 					<Navbar />
-					<div className='max-w-[67%] mx-auto mt-24 '>{children}</div>
+					<div className='md:max-w-[67%] px-4 mx-auto md:mt-24 mt-10 mb-10'>{children}</div>
 					<Toaster/>
 				</ThemeProvider>
 			</body>
