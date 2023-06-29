@@ -1,7 +1,15 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Card, CardContent } from '@/components/ui/card';
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from '@/components/ui/card';
+import { Separator } from "@/components/ui/separator"
 
 const Portfolio = () => {
 	const technologies = [
@@ -86,6 +94,8 @@ const Portfolio = () => {
 										width={50}
 										height={50}
 										alt={technology.name}
+										// this is temporary
+										className={(technology.name == "ExpressJS" || technology.name == "Next.js") ? "dark:invert" : "" }
 									/>
 									<span className='mt-2'>{technology.name}</span>
 								</div>
@@ -94,8 +104,47 @@ const Portfolio = () => {
 					))}
 				</div>
 			</div>
-			<div className='mt-20'>
-				<h2 className='font-bold text-5xl mb-2 '>Projects</h2>
+			<Separator className='my-6' />
+			<div className=''>
+				<h2 className='font-bold text-5xl mb-7 '>Projects</h2>
+				<div>
+					<Card className='cursor-pointer mb-3'>
+						<CardHeader>
+							<CardTitle>snipz</CardTitle>
+							<CardDescription>A github gist clone that supports code execution, live collaboration</CardDescription>
+						</CardHeader>
+						<CardContent>
+							<p>Card Content</p>
+						</CardContent>
+						<CardFooter>
+							<p>Card Footer</p>
+						</CardFooter>
+					</Card>
+					<Card className='cursor-pointer mb-3'>
+						<CardHeader>
+							<CardTitle>snipz</CardTitle>
+							<CardDescription>A github gist clone that supports code execution, live collaboration</CardDescription>
+						</CardHeader>
+						<CardContent>
+							<p>Card Content</p>
+						</CardContent>
+						<CardFooter>
+							<p>Card Footer</p>
+						</CardFooter>
+					</Card>
+					<Card className='cursor-pointer mb-3'>
+						<CardHeader>
+							<CardTitle>snipz</CardTitle>
+							<CardDescription>A github gist clone that supports code execution, live collaboration</CardDescription>
+						</CardHeader>
+						<CardContent>
+							<p>Card Content</p>
+						</CardContent>
+						<CardFooter>
+							<p>Card Footer</p>
+						</CardFooter>
+					</Card>
+				</div>
 			</div>
 		</div>
 	);

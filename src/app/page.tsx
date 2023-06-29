@@ -16,7 +16,7 @@ export default function Home() {
 						<p className='leading-loose'>
 							Hey there! I&apos;m Gian Gonzaga, your friendly web
 							developer extraordinaire! I live and breathe JavaScript,
-							TypeScript, PHP, and React, and I&apos;m here to create
+							TypeScript, React, and more! I&apos;m here to create
 							the most awesome user experiences ever.
 							<br />
 							<br />
