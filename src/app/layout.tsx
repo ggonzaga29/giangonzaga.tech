@@ -20,11 +20,11 @@ export default function RootLayout({
 			<body className={inter.className}>
 				<ThemeProvider
 					attribute='class'
-					defaultTheme='system'
+					defaultTheme='light'
 					enableSystem
 				>
 					<Navbar />
-					<div className='max-w-[60%] mx-auto pt-24'>{children}</div>
+					<div className='max-w-[67%] mx-auto mt-24 '>{children}</div>
 				</ThemeProvider>
 			</body>
 		</html>
