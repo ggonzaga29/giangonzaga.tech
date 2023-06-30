@@ -23,7 +23,7 @@ import projects from '@/data/projects.json';
 
 const Portfolio = () => {
 	const getProject = async (repo: string) => {
-		const res = await fetch('http://localhost:3000/api/github?repo=' + repo);
+		const res = await fetch('/api/github?repo=' + repo);
 		const data = await res.json();
 		return data;
 	};
