@@ -22,7 +22,7 @@ type Repo = {
 	};
 	stars?: string;
 	forks?: string;
-	htmlUrl?: string;
+	html_url?: string;
 	time_since?: string;
 };
 
@@ -33,29 +33,34 @@ const ProjectList = () => {
 		return data;
 	};
 
-	const [repos, setRepos] = useState<any>([]);
+	const [repos, setRepos] = useState([] as Repo[]);
 
 	useEffect(() => {
 		const getRepos = async () => {
-			const repos = await Promise.all(
-				projects.map(async (project) => {
-					const repo = await getProject(project);
-					return repo;
-				})
-			);
-			setRepos((prev: any) => [...prev, ...repos]);
+			try {
+				const repositories = await Promise.all(
+					projects.map(async (project) => {
+						const repo = await getProject(project);
+						return repo;
+					})
+				);
+
+				setRepos([...repositories]);
+			} catch (error) {
+				console.log(error);
+			}
 		};
+
 		getRepos();
 
 		return () => {
 			setRepos([]);
-		}
+		};
 	}, []);
-
 
 	return (
 		<div>
-			{repos.map(async (repo: any) => {
+			{repos.map((repo: Repo) => {
 				const time_since = dayjs(repo.created_at).fromNow();
 				repo.created_at = dayjs(repo.created_at).format('DD/MM/YYYY');
 
