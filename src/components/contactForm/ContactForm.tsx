@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import validator from 'validator';
 
+import Link from 'next/link';
+
 import { Loader2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -26,6 +28,7 @@ const ContactForm = () => {
 			toast({
 				title: 'Message cannot be empty',
 				description: 'Please enter a message to send',
+				duration: 3000,
 			});
 			return;
 		}
@@ -35,6 +38,7 @@ const ContactForm = () => {
 				title: 'Name or email cannot be empty',
 				description:
 					'Please enter your name or email so I know how to respond to you :)',
+				duration: 3000,
 			});
 			return;
 		}
@@ -43,6 +47,7 @@ const ContactForm = () => {
 			toast({
 				title: 'Invalid email',
 				description: 'Please enter a valid email',
+				duration: 3000,
 			});
 			return;
 		}
@@ -65,6 +70,7 @@ const ContactForm = () => {
 			toast({
 				title: 'Message sent!',
 				description: 'I will get back to you within 24 hours!',
+				duration: 3000,
 			});
 			setName('');
 			setEmail('');
@@ -73,6 +79,7 @@ const ContactForm = () => {
 			toast({
 				title: 'Error sending message',
 				description: 'Please try again later',
+				duration: 3000,
 			});
 		}
 
@@ -80,8 +87,8 @@ const ContactForm = () => {
 	};
 
 	return (
-		<div className='flex flex-col justify-start items-center gap-3'>
-			<div className='grid w-full max-w-sm items-center gap-1.5'>
+		<div className='flex flex-col justify-start items-center max-w-md mx-auto gap-3'>
+			<div className='grid w-full items-center gap-1.5'>
 				<Label htmlFor='name'>Full name</Label>
 				<Input
 					type='text'
@@ -92,7 +99,7 @@ const ContactForm = () => {
 				/>
 			</div>
 
-			<div className='grid w-full max-w-sm  items-center gap-1.5'>
+			<div className='grid w-full items-center gap-1.5'>
 				<Label htmlFor='email'>Email</Label>
 				<Input
 					type='email'
@@ -103,7 +110,7 @@ const ContactForm = () => {
 				/>
 			</div>
 
-			<div className='grid w-full max-w-sm gap-1.5'>
+			<div className='grid w-full gap-1.5'>
 				<Label htmlFor='message-2'>Your Message</Label>
 				<Textarea
 					placeholder={`Let's get this conversation started!`}
@@ -116,7 +123,7 @@ const ContactForm = () => {
 				</p>
 			</div>
 
-			<div className='grid w-full max-w-sm mt-3'>
+			<div className='grid w-full mt-3'>
 				<Button onClick={sendMessage}>
 					{!isLoading ? (
 						<>
@@ -130,8 +137,17 @@ const ContactForm = () => {
 					)}
 				</Button>
 			</div>
-			<Label className='text-sm '>via Discord Webhooks</Label>
 
+			<div className='w-full'>
+				<div className='text-center'>
+					<Label className='text-sm text-center '>
+						via Discord Webhooks
+					</Label>
+				</div>
+				
+			</div>
+
+			
 		</div>
 	);
 };

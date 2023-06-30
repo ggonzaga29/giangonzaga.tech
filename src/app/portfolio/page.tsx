@@ -9,71 +9,24 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card';
-import { Separator } from "@/components/ui/separator"
+import { Separator } from '@/components/ui/separator';
+
+import { nanoid } from 'nanoid';
+import dayjs, { Dayjs } from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
+
+import ProjectCard from '@/components/projectCard/ProjectCard';
+
+import technologies from '@/data/technologies.json';
+import projects from '@/data/projects.json';
 
 const Portfolio = () => {
-	const technologies = [
-		{
-			name: 'React',
-			image:
-				'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-			url: 'https://reactjs.org/',
-		},
-		{
-			name: 'Next.js',
-			image:
-				'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
-			url: 'https://nextjs.org/',
-		},
-		{
-			name: 'TypeScript',
-			image:
-				'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
-			url: 'https://www.typescriptlang.org/',
-		},
-		{
-			name: 'SASS',
-			image:
-				'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg',
-			url: 'https://sass-lang.com/',
-		},
-		{
-			name: 'Tailwind CSS',
-			image:
-				'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg',
-			url: 'https://tailwindcss.com/',
-		},
-		{
-			name: 'Python',
-			image:
-				'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
-			url: 'https://www.python.org/',
-		},
-		{
-			name: 'NodeJS',
-			image:
-				'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
-			url: 'https://nodejs.org/en/',
-		},
-		{
-			name: 'ExpressJS',
-			image:
-				'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
-			url: 'https://expressjs.com/',
-		},
-		{
-			name: 'Docker',
-			image:
-				'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
-			url: 'https://www.docker.com/',
-		},
-		{
-			name: 'PostgreSQL',
-			image:
-				'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
-			url: 'https://www.postgresql.org/',
-		},
-	];
+	const getProject = async (repo: string) => {
+		const res = await fetch('http://localhost:3000/api/github?repo=' + repo);
+		const data = await res.json();
+		return data;
+	};
 
 	return (
 		<div>
@@ -95,7 +48,12 @@ const Portfolio = () => {
 										height={50}
 										alt={technology.name}
 										// this is temporary
-										className={(technology.name == "ExpressJS" || technology.name == "Next.js") ? "dark:invert" : "" }
+										className={
+											technology.name == 'ExpressJS' ||
+											technology.name == 'Next.js'
+												? 'dark:invert'
+												: ''
+										}
 									/>
 									<span className='mt-2'>{technology.name}</span>
 								</div>
@@ -108,42 +66,27 @@ const Portfolio = () => {
 			<div className=''>
 				<h2 className='font-bold text-5xl mb-7 '>Projects</h2>
 				<div>
-					<Card className='cursor-pointer mb-3'>
-						<CardHeader>
-							<CardTitle>snipz</CardTitle>
-							<CardDescription>A github gist clone that supports code execution, live collaboration</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<p>Card Content</p>
-						</CardContent>
-						<CardFooter>
-							<p>Card Footer</p>
-						</CardFooter>
-					</Card>
-					<Card className='cursor-pointer mb-3'>
-						<CardHeader>
-							<CardTitle>snipz</CardTitle>
-							<CardDescription>A github gist clone that supports code execution, live collaboration</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<p>Card Content</p>
-						</CardContent>
-						<CardFooter>
-							<p>Card Footer</p>
-						</CardFooter>
-					</Card>
-					<Card className='cursor-pointer mb-3'>
-						<CardHeader>
-							<CardTitle>snipz</CardTitle>
-							<CardDescription>A github gist clone that supports code execution, live collaboration</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<p>Card Content</p>
-						</CardContent>
-						<CardFooter>
-							<p>Card Footer</p>
-						</CardFooter>
-					</Card>
+					{projects.map(async (project) => {
+						const repo = await getProject(project);
+
+						const time_since = dayjs(repo.created_at).fromNow();
+						repo.created_at = dayjs(repo.created_at).format("DD/MM/YYYY");
+
+						return (
+							<ProjectCard
+								key={nanoid()}
+								name={repo.name}
+								description={repo.description}
+								language={repo.language}
+								created_at={repo.created_at}
+								owner={repo.owner}
+								stars={repo.stars}
+								forks={repo.forks}
+								htmlUrl={repo.html_url}
+								time_since={time_since}
+							/>
+						);
+					})}
 				</div>
 			</div>
 		</div>

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { nanoid } from 'nanoid';
 
@@ -23,16 +24,22 @@ const Navbar = () => {
 			name: 'Contact',
 			path: '/contact',
 		},
+		{
+			name: 'Blog',
+			path: '/blog',
+		},
 	];
 
-	const darkClasses = '';
-	const lightClasses = 'text-gray-400 hover:text-[#1F2937]';
 
 	return (
 		<div className='h-16 md:mt-10 mt-5 select-none '>
 			<div className='md:max-w-[67%] mx-auto md:px-0 px-4 h-full flex items-center justify-between'>
 				<div>
-					<h1 className='font-bold text-3xl '>GG</h1>
+					<h1 className='font-bold text-3xl '>
+						<Link href='/'>
+							<Image src="/logo.png" width={64} height={64} alt="logo" className='dark:invert'/>
+						</Link>
+					</h1>
 				</div>
 				<div className='flex gap-5 cursor-pointer items-center'>
 					{pages.map((page) => (
@@ -41,8 +48,8 @@ const Navbar = () => {
 							key={nanoid()}
 							className={`${
 								currentRoute === page.path
-									? darkClasses
-									: lightClasses
+									? ""
+									: "text-gray-300 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-300"
 							} transition-all duration-300`}
 						>
 							{page.name}
