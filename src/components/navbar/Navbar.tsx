@@ -23,6 +23,10 @@ const Navbar = () => {
 			name: 'Contact',
 			path: '/contact',
 		},
+		{
+			name: 'Blog',
+			path: '/blog',
+		},
 	];
 
 	const darkClasses = '';

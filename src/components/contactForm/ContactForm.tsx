@@ -26,6 +26,7 @@ const ContactForm = () => {
 			toast({
 				title: 'Message cannot be empty',
 				description: 'Please enter a message to send',
+				duration: 3000,
 			});
 			return;
 		}
@@ -35,6 +36,7 @@ const ContactForm = () => {
 				title: 'Name or email cannot be empty',
 				description:
 					'Please enter your name or email so I know how to respond to you :)',
+				duration: 3000,
 			});
 			return;
 		}
@@ -43,6 +45,7 @@ const ContactForm = () => {
 			toast({
 				title: 'Invalid email',
 				description: 'Please enter a valid email',
+				duration: 3000,
 			});
 			return;
 		}
@@ -65,6 +68,7 @@ const ContactForm = () => {
 			toast({
 				title: 'Message sent!',
 				description: 'I will get back to you within 24 hours!',
+				duration: 3000,
 			});
 			setName('');
 			setEmail('');
@@ -73,6 +77,7 @@ const ContactForm = () => {
 			toast({
 				title: 'Error sending message',
 				description: 'Please try again later',
+				duration: 3000,
 			});
 		}
 
@@ -131,7 +136,6 @@ const ContactForm = () => {
 				</Button>
 			</div>
 			<Label className='text-sm '>via Discord Webhooks</Label>
-
 		</div>
 	);
 };
