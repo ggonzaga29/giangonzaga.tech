@@ -69,10 +69,8 @@ const Portfolio = () => {
 					{projects.map(async (project) => {
 						const repo = await getProject(project);
 
-						repo.created_at = dayjs(repo.created_at).format("DD/MM/YYYY");
 						const time_since = dayjs(repo.created_at).fromNow();
-
-						console.log(time_since)
+						repo.created_at = dayjs(repo.created_at).format("DD/MM/YYYY");
 
 						return (
 							<ProjectCard
@@ -84,7 +82,7 @@ const Portfolio = () => {
 								owner={repo.owner}
 								stars={repo.stars}
 								forks={repo.forks}
-								htmlUrl={repo.htmlUrl}
+								htmlUrl={repo.html_url}
 								time_since={time_since}
 							/>
 						);

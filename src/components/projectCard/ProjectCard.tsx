@@ -1,4 +1,8 @@
-import React from 'react';
+'use client';
+
+import React, { FunctionComponent } from 'react';
+import { redirect } from 'next/navigation';
+import Link from 'next/link';
 import {
 	Card,
 	CardContent,
@@ -7,25 +11,10 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card';
-import { create } from 'domain';
 
+import { Star, GitFork } from 'lucide-react';
 
-
-/*
-data: {
-				name: data.name,
-				description: data.description,
-				language: data.language,
-				created_at: data.created_at,
-				owner: {
-					login: data.owner.login,
-					avatar_url: data.owner.avatar_url,
-				},
-				stars: data.stargazers_count,
-				forks: data.forks_count,
-			}
-*/
-interface ProjectCardProps {
+type ProjectCardProps = {
 	name?: string;
 	description?: string;
 	language?: string;
@@ -38,9 +27,9 @@ interface ProjectCardProps {
 	forks?: string;
 	htmlUrl?: string;
 	time_since?: string;
-}
+};
 
-const ProjectCard = ({
+const ProjectCard: FunctionComponent<ProjectCardProps> = ({
 	name,
 	description,
 	language,
@@ -50,23 +39,61 @@ const ProjectCard = ({
 	forks,
 	htmlUrl,
 	time_since,
-}: ProjectCardProps) => {
+}) => {
+	const languageColors = new Map();
+	languageColors.set('javascript', 'bg-yellow-500');
+	languageColors.set('typescript', 'bg-blue-500');
 
 	return (
-		<>
+		<Link href={htmlUrl ? htmlUrl : "#"} target='_blank'>
 			<Card className='cursor-pointer mb-3'>
 				<CardHeader>
-					<CardTitle>{name && "Repo Name"}</CardTitle>
-					<CardDescription>{time_since}</CardDescription>
+					<CardTitle className='flex justify-between'>
+						<span>{name} </span>
+						<iframe
+							src={`https://ghbtns.com/github-btn.html?user=${owner?.login}&repo=${name}&type=star&count=true&size=large`}
+							width='110'
+							height='30'
+							title='GitHub'
+						></iframe>
+					</CardTitle>
+					<CardDescription>
+						{created_at} - {time_since}
+					</CardDescription>
 				</CardHeader>
-				<CardContent>
+				<CardContent className='-my-2'>
 					<p> {description}</p>
 				</CardContent>
 				<CardFooter>
-					<p>Card Footer</p>
+					<div className='flex gap-3 md:gap-7'>
+						<div>
+							<span className='flex items-center gap-2'>
+								<div
+									className={`${languageColors.get(
+										language?.toLowerCase()
+									)} h-4 w-4 rounded-full`}
+								></div>
+								{language}
+							</span>
+						</div>
+						<div className='flex gap-3'>
+							<div>
+								<span className='flex items-center gap-1'>
+									<Star size={16} />
+									{stars}
+								</span>
+							</div>
+							<div>
+								<span className='flex items-center gap-1'>
+									<GitFork size={16} />
+									{forks}
+								</span>
+							</div>
+						</div>
+					</div>
 				</CardFooter>
 			</Card>
-		</>
+		</Link>
 	);
 };
 
