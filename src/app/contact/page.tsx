@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Send, Facebook, Mail, Github } from 'lucide-react';
+import { Facebook, Mail, Github } from 'lucide-react';
 
 import ContactForm from '@/components/contactForm/ContactForm';
 

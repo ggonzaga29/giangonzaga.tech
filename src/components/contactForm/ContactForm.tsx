@@ -11,7 +11,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
-import { Send, Facebook, Mail, Github } from 'lucide-react';
+import { Send } from 'lucide-react';
 
 const ContactForm = () => {
 	const { toast } = useToast();
