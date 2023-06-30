@@ -18,7 +18,7 @@ export default function Home() {
 				<section className='flex-1'>
 					<div className='mb-5 -ml-1'>
 						<h1 className='font-bold text-5xl mb-2 '>Gian Gonzaga</h1>
-						<span className='font-bold text-gray-400 dark:text-muted text-3xl'>
+						<span className='font-bold text-gray-400 dark:text-slate-500 text-3xl'>
 							Web Developer
 						</span>
 					</div>
