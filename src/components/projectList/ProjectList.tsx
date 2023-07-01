@@ -10,6 +10,7 @@ dayjs.extend(relativeTime);
 import projects from '@/data/projects.json';
 
 import ProjectCard from '../projectCard/ProjectCard';
+import ProjectCardSkeleton from '../projectCard/ProjectCardSkeleton';
 
 type Repo = {
 	name?: string;
@@ -34,6 +35,7 @@ const ProjectList = () => {
 	};
 
 	const [repos, setRepos] = useState([] as Repo[]);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const getRepos = async () => {
@@ -41,6 +43,7 @@ const ProjectList = () => {
 				const repositories = await Promise.all(
 					projects.map(async (project) => {
 						const repo = await getProject(project);
+				setLoading(false);
 						return repo;
 					})
 				);
@@ -60,25 +63,35 @@ const ProjectList = () => {
 
 	return (
 		<div>
-			{repos.map((repo: Repo) => {
-				const time_since = dayjs(repo.created_at).fromNow();
-				repo.created_at = dayjs(repo.created_at).format('DD/MM/YYYY');
+			{!loading ? (
+				repos.map((repo: Repo) => {
+					const time_since = dayjs(repo.created_at).fromNow();
+					repo.created_at = dayjs(repo.created_at).format(
+						'DD/MM/YYYY'
+					);
 
-				return (
-					<ProjectCard
-						key={nanoid()}
-						name={repo.name}
-						description={repo.description}
-						language={repo.language}
-						created_at={repo.created_at}
-						owner={repo.owner}
-						stars={repo.stars}
-						forks={repo.forks}
-						htmlUrl={repo.html_url}
-						time_since={time_since}
-					/>
-				);
-			})}
+					return (
+						<ProjectCard
+							key={nanoid()}
+							name={repo.name}
+							description={repo.description}
+							language={repo.language}
+							created_at={repo.created_at}
+							owner={repo.owner}
+							stars={repo.stars}
+							forks={repo.forks}
+							htmlUrl={repo.html_url}
+							time_since={time_since}
+						/>
+					);
+				})
+			) : (
+				<div className='space-y-3'>
+					{projects.map(() => {
+						return <ProjectCardSkeleton key={nanoid()} />;
+					})}
+				</div>
+			)}
 		</div>
 	);
 };

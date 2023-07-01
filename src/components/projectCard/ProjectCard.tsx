@@ -62,7 +62,7 @@ const ProjectCard: FunctionComponent<ProjectCardProps> = ({
 					</CardDescription>
 				</CardHeader>
 				<CardContent className='-my-2'>
-					<p> {description}</p>
+					<p>{description}</p>
 				</CardContent>
 				<CardFooter>
 					<div className='flex gap-3 md:gap-7'>
