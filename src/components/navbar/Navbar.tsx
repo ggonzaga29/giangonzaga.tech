@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -14,6 +14,20 @@ import { SidebarOpen, SidebarClose, Menu, X } from 'lucide-react';
 const Navbar = () => {
 	const currentRoute = usePathname();
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+	useEffect(() => {
+		setIsSidebarOpen(false);
+	}, [currentRoute]);
+
+	useEffect(() => {
+		scrollTo(0, 0);
+
+			if (isSidebarOpen) {
+				document.body.style.overflow = 'hidden';
+			} else {
+				document.body.style.overflow = 'unset';
+			}
+	}, [isSidebarOpen]);
 
 	const pages = [
 		{
@@ -110,7 +124,6 @@ const Navbar = () => {
 												? 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'
 												: ''
 										} transition-all duration-300 px-2 py-2`}
-										onClick={() => setIsSidebarOpen(!isSidebarOpen)}
 									>
 										{page.name}
 									</Link>
