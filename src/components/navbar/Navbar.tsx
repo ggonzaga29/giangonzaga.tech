@@ -53,7 +53,7 @@ const Navbar = () => {
 				{/* End Logo */}
 
 				{/* Navigation Menu */}
-				<div className='flex gap-5 cursor-pointer items-center'>
+				<div className='flex-1 cursor-pointer flex justify-center'>
 					<div className='space-x-5 md:block hidden'>
 						{pages.map((page) => (
 							<Link
