@@ -55,10 +55,10 @@ const Drawer = ({
 						<Button
 							variant='outline'
 							size='icon'
-							className={`flex items-center justify-center absolute left-[110%] delay-100 transition-all duration-50 ${
+							className={`flex items-center justify-center absolute left-[110%] delay-50 transition-all duration-50 ${
 								isSidebarOpen
 									? ''
-									: 'transform -translate-y-[120%] opacity-0'
+									: 'transform -translate-x-[120%] opacity-0'
 							}`}
 							onClick={() => setIsSidebarOpen(!isSidebarOpen)}
 						>
