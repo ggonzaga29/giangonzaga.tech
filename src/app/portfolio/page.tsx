@@ -22,7 +22,7 @@ const Portfolio = () => {
 	return (
 		<div>
 			<div>
-				<h2 className='font-bold text-5xl mb-2'>Technologies</h2>
+				<h2 className='font-bold md:text-5xl text-4xl mb-2'>Technologies</h2>
 				<div className='grid md:grid-cols-6 grid-cols-3 mt-7 gap-5'>
 					{technologies.map((technology) => (
 						<Link
@@ -38,13 +38,10 @@ const Portfolio = () => {
 										width={50}
 										height={50}
 										alt={technology.name}
-										// this is temporary
-										className={
-											technology.name == 'ExpressJS' ||
-											technology.name == 'Next.js'
-												? 'dark:invert'
-												: ''
-										}
+										className={`${technology.name == 'ExpressJS' ||
+										technology.name == 'Next.js'
+											? 'dark:invert'
+											: ''} lg:h-16 lg:w-16 md:h-12 md:w-12 h-8 w-8`}
 									/>
 									<span className='mt-2'>{technology.name}</span>
 								</div>
@@ -55,7 +52,7 @@ const Portfolio = () => {
 			</div>
 			<Separator className='my-6' />
 			<div className=''>
-				<h2 className='font-bold text-5xl mb-7 '>Projects</h2>
+				<h2 className='font-bold md:text-5xl text-4xl mb-7 '>Projects</h2>
 				<div>
 					<ProjectList />
 				</div>
