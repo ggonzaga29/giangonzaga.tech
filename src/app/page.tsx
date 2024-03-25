@@ -48,7 +48,6 @@ export default function Home() {
 
 			<div className='flex flex-col leading-loose text-sm mt-8 mb-5'>
 				<span>gonzagagianfrancesco@gmail.com</span>
-				<span>+639196449757 | +639667334990</span>
 			</div>
 
 			<div className=' flex gap-5'>
